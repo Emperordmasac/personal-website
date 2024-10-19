@@ -2,38 +2,30 @@
 
 import React from "react"
 import Image from "next/image"
+import "@vidstack/react/player/styles/base.css"
+import "@vidstack/react/player/styles/plyr/theme.css"
+import { MediaPlayer, MediaProvider } from "@vidstack/react"
+import {
+  PlyrLayout,
+  plyrLayoutIcons
+} from "@vidstack/react/player/layouts/plyr"
 import { GlobeIcon, MailIcon } from "lucide-react"
-
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Section } from "@/components/ui/section"
-import { CommandMenu } from "@/components/command-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Section } from "@/components/ui/section"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-
-// import {
-//   NavigationMenu,
-//   NavigationMenuItem,
-//   NavigationMenuList
-// } from "@/components/ui/navigation-menu"
+import { Badge } from "@/components/ui/badge"
 
 import { RESUME_DATA } from "@/data/resume-data"
-
-// const sections = [
-//   { title: "Education", id: "education" },
-//   { title: "Work Experience", id: "work-experience" }
-// ]
+import { CommandMenu } from "@/components/command-menu"
 
 const page = () => {
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
-      <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
+      <section className="mx-auto w-full max-w-3xl space-y-8 bg-white print:space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex-1 space-y-1.5">
             <h1 className="text-2xl font-bold">{RESUME_DATA.name}</h1>
-            {/* <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground">
-              {RESUME_DATA.about} 
-            </p> */}
             <p className="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
               <a
                 className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
@@ -92,79 +84,102 @@ const page = () => {
               ) : null}
             </div>
           </div>
-          <Avatar className="size-28">
-            <AvatarImage alt={RESUME_DATA.name} src={RESUME_DATA.avatarUrl} />
-            <AvatarFallback>{RESUME_DATA.initials}</AvatarFallback>
-          </Avatar>
+          <div className="relative group">
+            <Avatar className="size-28">
+              <AvatarImage
+                alt={RESUME_DATA.name}
+                src={RESUME_DATA.avatarUrl1}
+                className="transition-opacity duration-300 ease-in-out group-hover:opacity-0"
+              />
+              <AvatarImage
+                alt={RESUME_DATA.name}
+                src={RESUME_DATA.avatarUrl2}
+                className="absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+              />
+              <AvatarFallback>{RESUME_DATA.initials}</AvatarFallback>
+            </Avatar>
+          </div>
         </div>
-        {/* <div className='flex items-center'>
-          <NavigationMenu>
-            <NavigationMenuList className="space-x-10"> 
-              {sections.map((section) => (
-                <NavigationMenuItem key={section.id}>
-                  <a href={`#${section.id}`} className="text-pretty font-mono text-sm hover:underline">
-                    {section.title}
-                  </a>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div> */}
         <Section>
-          <h2 className="text-xl font-bold">About</h2>
-          <p className="text-pretty font-mono text-sm text-muted-foreground">
-            {RESUME_DATA.about}
-          </p>
+          {/* <h2 className="text-xl font-bold">About</h2> */}
+          <p className="font-semibold">{RESUME_DATA.about}</p>
+
+          <div className="mt-2">
+            {RESUME_DATA.aboutBulletPoints.map((item) => (
+              <p className="mb-1">• {item}</p>
+            ))}
+          </div>
         </Section>
-        <Section>
+        {/* <Section>
           <h2 className="text-xl font-bold">Skills</h2>
           <div className="flex flex-wrap gap-1">
             {RESUME_DATA.skills.map((skill) => {
               return <Badge key={skill}>{skill}</Badge>
             })}
           </div>
-        </Section>
+        </Section> */}
         <Section id="currentlyBuilding">
-          <h2 className="text-xl font-bold">Currently Building</h2>
+          <h2 className="text-xl font-bold">Currently building</h2>
           {RESUME_DATA.currentlyBuilding.map((currentlyBuilding) => {
             return (
               <Card key={currentlyBuilding.name}>
                 <CardHeader>
-                  <div className="flex items-center justify-between gap-x-2 text-base">
-                    <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
-                      <a
-                        className="hover:underline max-w-[300px]"
-                        href={currentlyBuilding.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {currentlyBuilding.name}
-                      </a>
-
-                      <span className="inline-flex gap-x-1">
-                        {currentlyBuilding.badges.map((badge) => (
-                          <Badge
-                            variant="secondary"
-                            className="align-middle text-xxs"
-                            key={badge}
+                  <div className="flex items-center gap-x-3">
+                    {currentlyBuilding.logo && (
+                      <Image
+                        src={currentlyBuilding.logo}
+                        alt={`${currentlyBuilding.name} logo`}
+                        className="w-10 h-10 rounded-lg object-contain"
+                      />
+                    )}
+                    <div className="flex-grow">
+                      <div className="flex items-center justify-between gap-x-2 text-base">
+                        <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                          <a
+                            className="hover:underline max-w-[300px]"
+                            href={currentlyBuilding.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            {badge}
-                          </Badge>
-                        ))}
-                      </span>
-                    </h3>
-                    <div className="text-sm tabular-nums text-gray-500">
-                      {currentlyBuilding.date}
+                            {currentlyBuilding.name}
+                          </a>
+                        </h3>
+                        <div className="text-sm tabular-nums text-gray-500">
+                          {currentlyBuilding.date}
+                        </div>
+                      </div>
+
+                      <h4 className="font-mono text-sm leading-none max-w-[500px]">
+                        {currentlyBuilding.title}
+                      </h4>
                     </div>
                   </div>
-
-                  <h4 className="font-mono text-sm leading-none max-w-[500px]">
-                    {currentlyBuilding.title}
-                  </h4>
                 </CardHeader>
-                <CardContent className="mt-2 text-xs">
-                  {currentlyBuilding.description}
+
+                <CardContent className="flex flex-col mt-2 gap-4">
+                  <p className="text-xs">{currentlyBuilding.description}</p>
+                  {currentlyBuilding.videoLink && (
+                    <MediaPlayer
+                      title={currentlyBuilding.name}
+                      src={currentlyBuilding.videoLink}
+                    >
+                      <MediaProvider />
+                      <PlyrLayout icons={plyrLayoutIcons} />
+                    </MediaPlayer>
+                  )}
+                  <span className="inline-flex gap-x-1">
+                    {currentlyBuilding.badges.map((badge) => (
+                      <Badge
+                        variant="secondary"
+                        className="align-middle text-xxs"
+                        key={badge}
+                      >
+                        {badge}
+                      </Badge>
+                    ))}
+                  </span>
                 </CardContent>
+
                 <CardFooter>
                   <Button>
                     <a
@@ -184,42 +199,51 @@ const page = () => {
           <h2 className="text-xl font-bold">Work Experience</h2>
           {RESUME_DATA.work.map((work) => {
             return (
-              <Card key={work.company}>
+              <Card key={work.company} className="w-full mb-4">
                 <CardHeader>
-                  <div className="flex items-center justify-between gap-x-2 text-base">
-                    <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
-                      <a
-                        className="hover:underline"
-                        href={work.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {work.company}
-                      </a>
-
-                      <span className="inline-flex gap-x-1">
-                        {work.badges.map((badge) => (
-                          <Badge
-                            variant="secondary"
-                            className="align-middle text-xs"
-                            key={badge}
+                  <div className="flex items-center gap-x-3">
+                    {work.logo && (
+                      <Image
+                        src={work.logo}
+                        alt={`${work.company} logo`}
+                        className="w-12 h-12 rounded-lg object-contain"
+                      />
+                    )}
+                    <div className="flex-grow">
+                      <div className="flex items-center justify-between gap-x-2 text-base">
+                        <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                          <a
+                            className="hover:underline"
+                            href={work.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            {badge}
-                          </Badge>
-                        ))}
-                      </span>
-                    </h3>
-                    <div className="text-sm tabular-nums text-gray-500">
-                      {work.start} - {work.end}
+                            {work.company}
+                          </a>
+                        </h3>
+                        <div className="text-sm tabular-nums text-gray-500">
+                          {work.start} - {work.end}
+                        </div>
+                      </div>
+                      <h4 className="font-mono text-sm leading-none max-w-[500px] mt-1">
+                        {work.title}
+                      </h4>
                     </div>
                   </div>
-
-                  <h4 className="font-mono text-sm leading-none max-w-[500px]">
-                    {work.title}
-                  </h4>
                 </CardHeader>
                 <CardContent className="mt-2 text-xs">
                   {work.description}
+                  <span className="flex gap-x-1 mt-4">
+                    {work.badges.map((badge) => (
+                      <Badge
+                        variant="secondary"
+                        className="align-middle text-xs"
+                        key={badge}
+                      >
+                        {badge}
+                      </Badge>
+                    ))}
+                  </span>
                 </CardContent>
               </Card>
             )
@@ -231,18 +255,29 @@ const page = () => {
             return (
               <Card key={education.school}>
                 <CardHeader>
-                  <div className="flex items-center justify-between gap-x-2 text-base">
-                    <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
-                      <p>{education.school}</p>
-                    </h3>
-                    <div className="text-sm tabular-nums text-gray-500">
-                      {education.start} - {education.end}
+                  <div className="flex items-center gap-x-3">
+                    {education.logo && (
+                      <Image
+                        src={education.logo}
+                        alt={`${education.school} logo`}
+                        className="w-12 h-12 rounded-lg object-contain"
+                      />
+                    )}
+                    <div className="flex-grow">
+                      <div className="flex items-center justify-between gap-x-2 text-base">
+                        <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                          <p>{education.school}</p>
+                        </h3>
+                        <div className="text-sm tabular-nums text-gray-500">
+                          {education.start} - {education.end}
+                        </div>
+                      </div>
+
+                      <h4 className="font-mono text-sm leading-none max-w-[500px]">
+                        {education.degree}
+                      </h4>
                     </div>
                   </div>
-
-                  <h4 className="font-mono text-sm leading-none max-w-[500px]">
-                    {education.degree}
-                  </h4>
                 </CardHeader>
                 <CardContent className="mt-2 text-xs">
                   {education.activities}

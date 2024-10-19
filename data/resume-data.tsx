@@ -1,6 +1,11 @@
-import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons"
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  XIcon,
+  InstagramIcon
+} from "@/components/icons"
 
-import { AuditbarLogo, GoCharge, GymFit } from "@/public"
+import { AuditbarLogo, GoCharge, GymFit, TaskLite, Oau } from "@/public"
 
 export const RESUME_DATA = {
   name: "Olamilekan Abiola",
@@ -8,13 +13,27 @@ export const RESUME_DATA = {
   location: "Lagos, NG",
   locationLink: "https://www.google.com/maps/place/Lagos",
   about:
-    "Full Stack Engineer focused on building products with extra attention to detail | building TasListe",
+    "Hi I'm Ola, a full stack engineer focused on building products with extra attention to detail | building TaskLite",
+  aboutBulletPoints: [
+    "Building scalable web apps with React, Next.js, and Vite.",
+    "Experienced in seamless API integration and data management.",
+    "Experienced in leading teams and managing projects, from ideation to deployment.",
+    "Passionate about creating visually appealing interfaces and custom components for smooth user experiences",
+    "Team Lead @Auditbar",
+    "Avid reader, writer, and learner."
+  ],
   summary: "Very driven, passionate, fun individual.",
-  avatarUrl: "https://avatars.githubusercontent.com/u/37250437?v=4",
+  avatarUrl1: "https://avatars.githubusercontent.com/u/37250437?v=4",
+  avatarUrl2: "https://avatars.githubusercontent.com/u/96183717?v=4",
   personalWebsiteUrl: "https://personal-website-alpha-blue.vercel.app",
   contact: {
-    email: "horlaymilekan.dev@gmail.com",
+    email: null,
     social: [
+      {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/olamilekanabiola/",
+        icon: LinkedInIcon
+      },
       {
         name: "GitHub",
         url: "https://github.com/Emperordmasac",
@@ -26,9 +45,9 @@ export const RESUME_DATA = {
         icon: XIcon
       },
       {
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/in/olamilekanabiola/",
-        icon: LinkedInIcon
+        name: "Instagram",
+        url: "https://instagram.com/horlarmi__lekan",
+        icon: InstagramIcon
       }
     ]
   },
@@ -53,14 +72,16 @@ export const RESUME_DATA = {
   ],
   currentlyBuilding: [
     {
-      name: "TaskLite (WIP)",
+      name: "TaskLite",
       link: "https://jira-clone-orcin.vercel.app",
       badges: ["Startup", "Nextjs", "Appwrite", "Task management tool"],
       title: "A super easy to use online project and task management tool",
+      logo: TaskLite,
       date: "Since October 2024",
+      videoLink: "https://www.youtube.com/watch?v=Av9C7xlV0fA&list=PPSV",
       description:
         "TaskLite is a streamlined project and task management tool designed for teams seeking simplicity without sacrificing functionality. Unlike other complex tools, this app provides an intuitive platform where you can focus solely on your projects, tasks, and team members. Built with modern technologies like Next.js and Appwrite, it offers a user-friendly interface and essential features that keep project management easy and efficient, so you can get things done faster and without unnecessary complexity.",
-      projectDetailsLink: "https://producthunt.com/posts/tasklite"
+      projectDetailsLink: "https://jira-clone-orcin.vercel.app"
     }
   ],
   work: [
@@ -115,6 +136,7 @@ export const RESUME_DATA = {
       degree: "BSc. Computer Science",
       start: "2015",
       end: "2022",
+      logo: Oau,
       activities:
         "Data Structures, Algorithms, Software Engineering, Systen analysis and design, Operating systens"
     },
@@ -122,6 +144,7 @@ export const RESUME_DATA = {
       school: "Obafemi Awolowo University International School",
       degree: "High School",
       start: "2008",
+      logo: Oau,
       end: "2014",
       activities: "Football, Chess club, Science club"
     }
