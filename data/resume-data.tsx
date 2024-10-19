@@ -9,7 +9,7 @@ export const RESUME_DATA = {
   locationLink: "https://www.google.com/maps/place/Lagos",
   about:
     "Full Stack Engineer focused on building products with extra attention to detail",
-  summary: "My summary",
+  summary: "Very driven, passionate, fun individual.",
   avatarUrl: "https://avatars.githubusercontent.com/u/37250437?v=4",
   personalWebsiteUrl: "https://personal-website-alpha-blue.vercel.app",
   contact: {
@@ -76,6 +76,23 @@ export const RESUME_DATA = {
       end: "03/2021",
       description:
         "Built responsive and scalable web applications using React, Next.js, and Typescript, Collaborated closely with the backend teams to refine and define API requirements, ensuring efficient communication and seamless integration between frontend and backend systems."
+    }
+  ],
+  education: [
+    {
+      school: "Obafemi Awolowo University",
+      degree: "BSc. Computer Science",
+      start: "2015",
+      end: "2022",
+      activities:
+        "Data Structures, Algorithms, Software Engineering, Systen analysis and design, Operating systens"
+    },
+    {
+      school: "Obafemi Awolowo University International School",
+      degree: "High School",
+      start: "2008",
+      end: "2014",
+      activities: "Football, Chess club, Science club"
     }
   ]
 } as const
