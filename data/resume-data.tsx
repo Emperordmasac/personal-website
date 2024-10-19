@@ -8,7 +8,7 @@ export const RESUME_DATA = {
   location: "Lagos, NG",
   locationLink: "https://www.google.com/maps/place/Lagos",
   about:
-    "Full Stack Engineer focused on building products with extra attention to detail",
+    "Full Stack Engineer focused on building products with extra attention to detail | building TasListe",
   summary: "Very driven, passionate, fun individual.",
   avatarUrl: "https://avatars.githubusercontent.com/u/37250437?v=4",
   personalWebsiteUrl: "https://personal-website-alpha-blue.vercel.app",
@@ -49,7 +49,19 @@ export const RESUME_DATA = {
     "Prisma",
     "Firebase",
     "Appwrite",
-    "Python"
+    "ShadcnUI"
+  ],
+  currentlyBuilding: [
+    {
+      name: "TaskLite (WIP)",
+      link: "https://jira-clone-orcin.vercel.app",
+      badges: ["Startup", "Nextjs", "Appwrite", "Task management tool"],
+      title: "A super easy to use online project and task management tool",
+      date: "Since October 2024",
+      description:
+        "TaskLite is a streamlined project and task management tool designed for teams seeking simplicity without sacrificing functionality. Unlike other complex tools, this app provides an intuitive platform where you can focus solely on your projects, tasks, and team members. Built with modern technologies like Next.js and Appwrite, it offers a user-friendly interface and essential features that keep project management easy and efficient, so you can get things done faster and without unnecessary complexity.",
+      projectDetailsLink: "https://producthunt.com/posts/tasklite"
+    }
   ],
   work: [
     {

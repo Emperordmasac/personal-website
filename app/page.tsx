@@ -1,41 +1,39 @@
-import { Metadata } from "next"
+"use client"
+
+import React from "react"
+import Image from "next/image"
 import { GlobeIcon, MailIcon } from "lucide-react"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Section } from "@/components/ui/section"
+import { CommandMenu } from "@/components/command-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
 // import {
 //   NavigationMenu,
 //   NavigationMenuItem,
 //   NavigationMenuList
 // } from "@/components/ui/navigation-menu"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Section } from "@/components/ui/section"
-import { CommandMenu } from "@/components/command-menu"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { RESUME_DATA } from "@/data/resume-data"
 
-export const metadata: Metadata = {
-  title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
-  description: RESUME_DATA.summary
-}
-
 // const sections = [
-//   { title: "Awards", id: "awards" },
 //   { title: "Education", id: "education" },
 //   { title: "Work Experience", id: "work-experience" }
 // ]
 
-const HomePage = () => {
+const page = () => {
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
       <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex-1 space-y-1.5">
             <h1 className="text-2xl font-bold">{RESUME_DATA.name}</h1>
-            <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground">
-              {RESUME_DATA.about}
-            </p>
+            {/* <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground">
+              {RESUME_DATA.about} 
+            </p> */}
             <p className="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
               <a
                 className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
@@ -99,12 +97,12 @@ const HomePage = () => {
             <AvatarFallback>{RESUME_DATA.initials}</AvatarFallback>
           </Avatar>
         </div>
-        {/* <div className="flex items-center">
+        {/* <div className='flex items-center'>
           <NavigationMenu>
-            <NavigationMenuList className="space-x-10">
+            <NavigationMenuList className="space-x-10"> 
               {sections.map((section) => (
                 <NavigationMenuItem key={section.id}>
-                  <a href={`#${section.id}`} className="hover:underline">
+                  <a href={`#${section.id}`} className="text-pretty font-mono text-sm hover:underline">
                     {section.title}
                   </a>
                 </NavigationMenuItem>
@@ -115,7 +113,7 @@ const HomePage = () => {
         <Section>
           <h2 className="text-xl font-bold">About</h2>
           <p className="text-pretty font-mono text-sm text-muted-foreground">
-            {RESUME_DATA.summary}
+            {RESUME_DATA.about}
           </p>
         </Section>
         <Section>
@@ -125,6 +123,62 @@ const HomePage = () => {
               return <Badge key={skill}>{skill}</Badge>
             })}
           </div>
+        </Section>
+        <Section id="currentlyBuilding">
+          <h2 className="text-xl font-bold">Currently Building</h2>
+          {RESUME_DATA.currentlyBuilding.map((currentlyBuilding) => {
+            return (
+              <Card key={currentlyBuilding.name}>
+                <CardHeader>
+                  <div className="flex items-center justify-between gap-x-2 text-base">
+                    <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                      <a
+                        className="hover:underline max-w-[300px]"
+                        href={currentlyBuilding.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {currentlyBuilding.name}
+                      </a>
+
+                      <span className="inline-flex gap-x-1">
+                        {currentlyBuilding.badges.map((badge) => (
+                          <Badge
+                            variant="secondary"
+                            className="align-middle text-xxs"
+                            key={badge}
+                          >
+                            {badge}
+                          </Badge>
+                        ))}
+                      </span>
+                    </h3>
+                    <div className="text-sm tabular-nums text-gray-500">
+                      {currentlyBuilding.date}
+                    </div>
+                  </div>
+
+                  <h4 className="font-mono text-sm leading-none max-w-[500px]">
+                    {currentlyBuilding.title}
+                  </h4>
+                </CardHeader>
+                <CardContent className="mt-2 text-xs">
+                  {currentlyBuilding.description}
+                </CardContent>
+                <CardFooter>
+                  <Button>
+                    <a
+                      href={currentlyBuilding.projectDetailsLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View details
+                    </a>
+                  </Button>
+                </CardFooter>
+              </Card>
+            )
+          })}
         </Section>
         <Section id="work-experience">
           <h2 className="text-xl font-bold">Work Experience</h2>
@@ -185,6 +239,7 @@ const HomePage = () => {
                       {education.start} - {education.end}
                     </div>
                   </div>
+
                   <h4 className="font-mono text-sm leading-none max-w-[500px]">
                     {education.degree}
                   </h4>
@@ -197,6 +252,7 @@ const HomePage = () => {
           })}
         </Section>
       </section>
+
       <CommandMenu
         links={[
           ...RESUME_DATA.contact.social.map((socialMediaLink) => ({
@@ -209,4 +265,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default page
