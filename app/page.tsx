@@ -1,9 +1,15 @@
 import { Metadata } from "next"
 import { GlobeIcon, MailIcon } from "lucide-react"
 
+// import {
+//   NavigationMenu,
+//   NavigationMenuItem,
+//   NavigationMenuList
+// } from "@/components/ui/navigation-menu"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Section } from "@/components/ui/section"
+import { CommandMenu } from "@/components/command-menu"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -13,6 +19,12 @@ export const metadata: Metadata = {
   title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
   description: RESUME_DATA.summary
 }
+
+// const sections = [
+//   { title: "Awards", id: "awards" },
+//   { title: "Education", id: "education" },
+//   { title: "Work Experience", id: "work-experience" }
+// ]
 
 const HomePage = () => {
   return (
@@ -87,6 +99,19 @@ const HomePage = () => {
             <AvatarFallback>{RESUME_DATA.initials}</AvatarFallback>
           </Avatar>
         </div>
+        {/* <div className="flex items-center">
+          <NavigationMenu>
+            <NavigationMenuList className="space-x-10">
+              {sections.map((section) => (
+                <NavigationMenuItem key={section.id}>
+                  <a href={`#${section.id}`} className="hover:underline">
+                    {section.title}
+                  </a>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div> */}
         <Section>
           <h2 className="text-xl font-bold">About</h2>
           <p className="text-pretty font-mono text-sm text-muted-foreground">
@@ -101,7 +126,7 @@ const HomePage = () => {
             })}
           </div>
         </Section>
-        <Section>
+        <Section id="work-experience">
           <h2 className="text-xl font-bold">Work Experience</h2>
           {RESUME_DATA.work.map((work) => {
             return (
@@ -146,7 +171,7 @@ const HomePage = () => {
             )
           })}
         </Section>
-        <Section>
+        <Section id="education">
           <h2 className="text-xl font-bold">Education</h2>
           {RESUME_DATA.education.map((education) => {
             return (
@@ -172,6 +197,14 @@ const HomePage = () => {
           })}
         </Section>
       </section>
+      <CommandMenu
+        links={[
+          ...RESUME_DATA.contact.social.map((socialMediaLink) => ({
+            url: socialMediaLink.url,
+            title: socialMediaLink.name
+          }))
+        ]}
+      />
     </main>
   )
 }
