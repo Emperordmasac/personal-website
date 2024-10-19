@@ -32,6 +32,25 @@ export const RESUME_DATA = {
       }
     ]
   },
+  skills: [
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "NextJS",
+    "Vite",
+    "NodeJS",
+    "NextJS",
+    "TailwindCSS",
+    "PostgreSQL",
+    "Supabase",
+    "Docker",
+    "Kubernetes",
+    "DrizzleORM",
+    "Prisma",
+    "Firebase",
+    "Appwrite",
+    "Python"
+  ],
   work: [
     {
       company: "Auditbar",
