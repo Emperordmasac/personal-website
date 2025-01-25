@@ -23,6 +23,7 @@ const page = () => {
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
       <section className="mx-auto w-full max-w-3xl space-y-8 bg-white print:space-y-6">
+        {/* SOCIALS & CONTACT INFO */}
         <div className="flex items-center justify-between">
           <div className="flex-1 space-y-1.5">
             <h1 className="text-2xl font-bold">{RESUME_DATA.name}</h1>
@@ -100,35 +101,43 @@ const page = () => {
             </Avatar>
           </div>
         </div>
+
+        {/* ABOUT ME */}
         <Section>
           {/* <h2 className="text-xl font-bold">About</h2> */}
           <p className="font-semibold">{RESUME_DATA.about}</p>
 
           <div className="mt-2">
-            {RESUME_DATA.aboutBulletPoints.map((item) => (
-              <p className="mb-1">• {item}</p>
+            {RESUME_DATA.aboutBulletPoints.map((item, i) => (
+              <p key={`${i}+1`} className="mb-1">
+                • {item}
+              </p>
             ))}
           </div>
         </Section>
-        {/* <Section>
+
+        {/* SKILLS */}
+        <Section>
           <h2 className="text-xl font-bold">Skills</h2>
           <div className="flex flex-wrap gap-1">
             {RESUME_DATA.skills.map((skill) => {
               return <Badge key={skill}>{skill}</Badge>
             })}
           </div>
-        </Section> */}
-        <Section id="currentlyBuilding">
-          <h2 className="text-xl font-bold">Currently building</h2>
-          {RESUME_DATA.currentlyBuilding.map((currentlyBuilding) => {
+        </Section>
+
+        {/* PROJECTS */}
+        <Section id="projects">
+          <h2 className="text-xl font-bold">Projects</h2>
+          {RESUME_DATA.projects.map((project) => {
             return (
-              <Card key={currentlyBuilding.name}>
+              <Card key={project.name}>
                 <CardHeader>
                   <div className="flex items-center gap-x-3">
-                    {currentlyBuilding.logo && (
+                    {project.logo && (
                       <Image
-                        src={currentlyBuilding.logo}
-                        alt={`${currentlyBuilding.name} logo`}
+                        src={project.logo}
+                        alt={`${project.name} logo`}
                         className="w-10 h-10 rounded-lg object-contain"
                       />
                     )}
@@ -137,38 +146,45 @@ const page = () => {
                         <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
                           <a
                             className="hover:underline max-w-[300px]"
-                            href={currentlyBuilding.link}
+                            href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            {currentlyBuilding.name}
+                            {project.name}
                           </a>
                         </h3>
                         <div className="text-sm tabular-nums text-gray-500">
-                          {currentlyBuilding.date}
+                          {project.date}
                         </div>
                       </div>
 
                       <h4 className="font-mono text-sm leading-none max-w-[500px]">
-                        {currentlyBuilding.title}
+                        {project.title}
                       </h4>
                     </div>
                   </div>
                 </CardHeader>
 
                 <CardContent className="flex flex-col mt-2 gap-4">
-                  <p className="text-xs">{currentlyBuilding.description}</p>
-                  {currentlyBuilding.videoLink && (
+                  <p className="text-xs">{project.description}</p>
+                  {/* {project.videoLink && (
                     <MediaPlayer
-                      title={currentlyBuilding.name}
-                      src={currentlyBuilding.videoLink}
+                      title={project.name}
+                      src={project.videoLink}
                     >
                       <MediaProvider />
                       <PlyrLayout icons={plyrLayoutIcons} />
                     </MediaPlayer>
+                  )} */}
+                  {project.image && (
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} image`}
+                      className="w-full h-auto rounded-lg object-contain"
+                    />
                   )}
                   <span className="inline-flex gap-x-1">
-                    {currentlyBuilding.badges.map((badge) => (
+                    {project.badges.map((badge) => (
                       <Badge
                         variant="secondary"
                         className="align-middle text-xxs"
@@ -183,11 +199,11 @@ const page = () => {
                 <CardFooter>
                   <Button>
                     <a
-                      href={currentlyBuilding.projectDetailsLink}
+                      href={project.projectDetailsLink}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      View details
+                      View project
                     </a>
                   </Button>
                 </CardFooter>
@@ -195,6 +211,8 @@ const page = () => {
             )
           })}
         </Section>
+
+        {/* WORK EXPERIENCE */}
         <Section id="work-experience">
           <h2 className="text-xl font-bold">Work Experience</h2>
           {RESUME_DATA.work.map((work) => {
@@ -249,6 +267,8 @@ const page = () => {
             )
           })}
         </Section>
+
+        {/* EDUCATION */}
         <Section id="education">
           <h2 className="text-xl font-bold">Education</h2>
           {RESUME_DATA.education.map((education) => {

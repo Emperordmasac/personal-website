@@ -5,7 +5,14 @@ import {
   InstagramIcon
 } from "@/components/icons"
 
-import { AuditbarLogo, GoCharge, GymFit, TaskLite, Oau } from "@/public"
+import {
+  AuditbarLogo,
+  GoCharge,
+  GymFit,
+  TaskLite,
+  Oau,
+  TaskLiteMvp
+} from "@/public"
 
 export const RESUME_DATA = {
   name: "Olamilekan Abiola",
@@ -70,18 +77,25 @@ export const RESUME_DATA = {
     "Appwrite",
     "ShadcnUI"
   ],
-  currentlyBuilding: [
+  projects: [
     {
       name: "TaskLite",
-      link: "https://jira-clone-orcin.vercel.app",
-      badges: ["Startup", "Nextjs", "Appwrite", "Task management tool"],
-      title: "A super easy to use online project and task management tool",
+      link: "https://tasklite-mvp.vercel.app/",
+      badges: [
+        "Startup",
+        "Nextjs",
+        "Appwrite",
+        "HonoJs",
+        "Task management tool"
+      ],
+      title: "Effortless task management tool",
       logo: TaskLite,
-      date: "Since October 2024",
+      date: "December 2024",
       videoLink: "https://www.youtube.com/watch?v=Av9C7xlV0fA&list=PPSV",
+      image: TaskLiteMvp,
       description:
-        "TaskLite is a streamlined project and task management tool designed for teams seeking simplicity without sacrificing functionality. Unlike other complex tools, this app provides an intuitive platform where you can focus solely on your projects, tasks, and team members. Built with modern technologies like Next.js and Appwrite, it offers a user-friendly interface and essential features that keep project management easy and efficient, so you can get things done faster and without unnecessary complexity.",
-      projectDetailsLink: "https://jira-clone-orcin.vercel.app"
+        "Manage tasks projects easily with an all-in-one platform designed for seamless collaboration",
+      projectDetailsLink: "https://tasklite-mvp.vercel.app/"
     }
   ],
   work: [
@@ -139,14 +153,6 @@ export const RESUME_DATA = {
       logo: Oau,
       activities:
         "Data Structures, Algorithms, Software Engineering, Systen analysis and design, Operating systens"
-    },
-    {
-      school: "Obafemi Awolowo University International School",
-      degree: "High School",
-      start: "2008",
-      logo: Oau,
-      end: "2014",
-      activities: "Football, Chess club, Science club"
     }
   ]
 } as const
